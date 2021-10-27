@@ -1,12 +1,19 @@
 import styled from '@emotion/styled'
 import { MenuIcon, Logo } from 'assets/icon'
+import Router from 'next/router'
 
 const Header = () => {
+  const clickLogin = () => {
+    Router.push('/login')
+  }
+  const clickLogo = () => {
+    Router.push('/')
+  }
   return (
     <HeaderWrap>
       <MenuIcon />
-      <Logo />
-      <LoginButton>로그인</LoginButton>
+      <Logo onClick={clickLogo} />
+      <LoginButton onClick={clickLogin}>로그인</LoginButton>
     </HeaderWrap>
   )
 }
@@ -24,7 +31,12 @@ const HeaderWrap = styled.header`
 
 const LoginButton = styled.button`
   width: 5.7rem;
-  background-color: white;
+  border: 1px solid var(--black);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1a1a1a;
 `
 
 export default Header
