@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Logo, PrevIcon } from 'assets/login'
 import router from 'next/router'
+import GoogleLogin from 'components/login/GoogleLogin'
 
 type LoginLayerProps = {
   googleLogin: () => void
@@ -23,7 +24,7 @@ const LoginLayer = ({ googleLogin }: LoginLayerProps) => {
       <ButtonWrap>
         <div>kakao</div>
         <div>naver</div>
-        <div>google</div>
+        <GoogleLogin />
       </ButtonWrap>
     </LoginLayerWrap>
   )
