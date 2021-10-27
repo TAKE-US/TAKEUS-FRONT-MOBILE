@@ -18,5 +18,13 @@ const globalStyle = css`
   * {
     box-sizing: border-box;
   }
+
+  button {
+    background: none;
+    border: none;
+    :active {
+      outline: none;
+    }
+  }
 `
 export default globalStyle
