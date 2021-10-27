@@ -3,9 +3,11 @@ import palette from './palette'
 
 const globalStyle = css`
   ${palette}
+  html,
   body {
     padding: 0;
     margin: 0;
+    font-size: 10px;
   }
 
   a {

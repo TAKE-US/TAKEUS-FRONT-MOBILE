@@ -15,6 +15,8 @@ const HeaderWrap = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 2.1rem;
+  width: 100%;
+  height: 5rem;
   background: var(--primary_light);
 `
 
