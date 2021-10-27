@@ -1,16 +1,22 @@
 import type { AppProps } from 'next/app'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { Header } from '../components/common'
 import { Global } from '@emotion/react'
 import globalStyle from 'styles/globalStyle'
 import styled from '@emotion/styled'
+import router from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
+  const [isLoginPage, setIsLoginPage] = useState<boolean>(false)
+
+  useEffect(() => {
+    setIsLoginPage(router.pathname === '/login')
+  }, [router.pathname])
   return (
     <div>
       <Global styles={globalStyle} />
-      <Header />
-      <Layout>
+      {!isLoginPage && <Header />}
+      <Layout isLoginPage={isLoginPage}>
         <Component {...pageProps} />
       </Layout>
     </div>
@@ -18,6 +24,9 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 }
 export default MyApp
 
-const Layout = styled.div`
-  padding-top: 5rem;
+type LayoutProps = {
+  isLoginPage: boolean
+}
+const Layout = styled.div<LayoutProps>`
+  padding-top: ${({ isLoginPage }) => (isLoginPage ? '0' : '5rem')};
 `

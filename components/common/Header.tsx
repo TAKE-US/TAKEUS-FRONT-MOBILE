@@ -1,8 +1,10 @@
 import styled from '@emotion/styled'
-import { MenuIcon, Logo } from 'assets/icon'
+import { MenuIcon, Logo } from 'assets/common'
 import Router from 'next/router'
+import { useState } from 'react'
 
 const Header = () => {
+  const [isLogin, setIsLogin] = useState<boolean>(false)
   const clickLogin = () => {
     Router.push('/login')
   }
@@ -13,7 +15,11 @@ const Header = () => {
     <HeaderWrap>
       <MenuIcon />
       <Logo onClick={clickLogo} />
-      <LoginButton onClick={clickLogin}>로그인</LoginButton>
+      {isLogin ? (
+        <div>done</div>
+      ) : (
+        <LoginButton onClick={clickLogin}>로그인</LoginButton>
+      )}
     </HeaderWrap>
   )
 }

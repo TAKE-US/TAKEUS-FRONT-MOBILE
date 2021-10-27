@@ -1,5 +1,7 @@
+import LoginLayer from '@components/layer/LoginLayer'
+
 const LoginPage = () => {
-  return <div>login</div>
+  return <LoginLayer googleLogin={() => {}} />
 }
 
 export default LoginPage
