@@ -6,11 +6,15 @@ import GoogleLogin, {
 import styled from '@emotion/styled'
 import { GoogleIcon } from 'assets/login'
 
-const GoogleLoginButton = () => {
-  const handleSuccess = (
-    result: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    console.log(result)
+type GoogleLoginButtonProps = {
+  postAccessToken: (token: string, social: 'google' | 'naver' | 'kakao') => void
+}
+
+const GoogleLoginButton = ({ postAccessToken }: GoogleLoginButtonProps) => {
+  const handleSuccess = (response: GoogleLoginResponse) => {
+    if (response.code === undefined) {
+      postAccessToken(response.accessToken, 'google')
+    }
   }
   return (
     <GoogleLogin
@@ -26,8 +30,8 @@ const GoogleLoginButton = () => {
           구글로 시작하기
         </Button>
       )}
-      onSuccess={(res) => handleSuccess(res)}
-      onFailure={() => {}}
+      onSuccess={(response: any) => handleSuccess(response)}
+      onFailure={(res) => {}}
     />
   )
 }

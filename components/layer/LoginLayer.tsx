@@ -4,10 +4,10 @@ import router from 'next/router'
 import GoogleLogin from 'components/login/GoogleLogin'
 
 type LoginLayerProps = {
-  googleLogin: () => void
+  postAccessToken: (token: string, social: 'google' | 'naver' | 'kakao') => void
 }
 
-const LoginLayer = ({ googleLogin }: LoginLayerProps) => {
+const LoginLayer = ({ postAccessToken }: LoginLayerProps) => {
   const clickPrevButton = () => router.push('/')
   return (
     <LoginLayerWrap>
@@ -24,7 +24,7 @@ const LoginLayer = ({ googleLogin }: LoginLayerProps) => {
       <ButtonWrap>
         <div>kakao</div>
         <div>naver</div>
-        <GoogleLogin />
+        <GoogleLogin postAccessToken={postAccessToken} />
       </ButtonWrap>
     </LoginLayerWrap>
   )
