@@ -5,16 +5,21 @@ import GoogleLogin, {
 } from 'react-google-login'
 import styled from '@emotion/styled'
 import { GoogleIcon } from 'assets/login'
+import isGoogleLoginResponse from 'lib/type-guard/isGoogleLoginResponse'
 
 type GoogleLoginButtonProps = {
-  postAccessToken: (token: string, social: 'google' | 'naver' | 'kakao') => void
+  postAccessToken: (body: {
+    token: string
+    social: 'google' | 'naver' | 'kakao'
+  }) => void
 }
 
 const GoogleLoginButton = ({ postAccessToken }: GoogleLoginButtonProps) => {
-  const handleSuccess = (response: GoogleLoginResponse) => {
-    if (response.code === undefined) {
-      postAccessToken(response.accessToken, 'google')
-    }
+  const handleSuccess = (
+    response: GoogleLoginResponse | GoogleLoginResponseOffline
+  ) => {
+    if (isGoogleLoginResponse(response))
+      postAccessToken({ token: response.accessToken, social: 'google' })
   }
   return (
     <GoogleLogin
@@ -30,7 +35,7 @@ const GoogleLoginButton = ({ postAccessToken }: GoogleLoginButtonProps) => {
           구글로 시작하기
         </Button>
       )}
-      onSuccess={(response: any) => handleSuccess(response)}
+      onSuccess={(response) => handleSuccess(response)}
       onFailure={(res) => {}}
     />
   )

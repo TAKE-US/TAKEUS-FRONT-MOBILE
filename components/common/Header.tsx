@@ -4,7 +4,9 @@ import Router from 'next/router'
 import { useState } from 'react'
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false)
+  const [isLogin, setIsLogin] = useState<boolean>(
+    !!localStorage.getItem('x-access-token')
+  )
   const clickLogin = () => {
     Router.push('/login')
   }

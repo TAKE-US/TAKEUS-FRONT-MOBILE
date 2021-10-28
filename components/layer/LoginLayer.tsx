@@ -2,12 +2,12 @@ import styled from '@emotion/styled'
 import { Logo, PrevIcon } from 'assets/login'
 import router from 'next/router'
 import GoogleLogin from 'components/login/GoogleLogin'
+import { useLogin } from 'hooks/query/useLogin'
+import { LoginBody } from 'lib/api/users'
 
-type LoginLayerProps = {
-  postAccessToken: (token: string, social: 'google' | 'naver' | 'kakao') => void
-}
-
-const LoginLayer = ({ postAccessToken }: LoginLayerProps) => {
+const LoginLayer = () => {
+  const { mutateAsync: onLogin } = useLogin()
+  const postAccessToken = (body: LoginBody) => onLogin(body)
   const clickPrevButton = () => router.push('/')
   return (
     <LoginLayerWrap>

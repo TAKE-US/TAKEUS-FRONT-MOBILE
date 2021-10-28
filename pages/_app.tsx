@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Global } from '@emotion/react'
 import globalStyle from 'styles/globalStyle'
 import router from 'next/router'
+import { QueryClientProvider, QueryClient } from 'react-query'
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   axios.interceptors.response.use(
@@ -17,10 +18,13 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
       return error
     }
   )
+  const queryClient = new QueryClient()
   return (
     <div>
-      <Global styles={globalStyle} />
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Global styles={globalStyle} />
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </div>
   )
 }
